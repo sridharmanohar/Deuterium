@@ -41,4 +41,10 @@
         + And to do this I am taking the help of rayfocus-tasklet.api and spring-data-dynamodb projects under my-projects, these are springboot+dynamodb projects. 
         + I am trying to figure out how to build the springboot+dynamodb as a lambda function.
         + Added some dependencies in pom.xml. Let's try and build around them and let's see how it goes!
-    
++ Status Update: 31st Jan 2019:
+    + Have put some code in place in the springboot-lambda-dynamodb-v0 and deployed it on aws, not working!.
+    + Have downgraded the spring version from 2.2.0 to 1.5.9, since SpringBootServletInitialiazer and stuff that is used in LambdaHandler is not present in 2.2.0, so downgraded, it's getting called but when I call it from API, its throwing 'Missing Authenentication Token' error.
+    + Added a new test template, seeing some new errors, have to investigate:
+    org.springframework.web.util.NestedServletException: Request processing failed; nested exception is com.amazonaws.services.dynamodbv2.model.AmazonDynamoDBException: The security token included in the request is invalid. (Service: AmazonDynamoDBv2; Status Code: 400; Error Code: UnrecognizedClientException; Request ID: N6A4KP4AMFSAMKOEKAI20LC253VV4KQNSO5AEMVJF66Q9ASUAAJG)
+    + The above error was because I did not set the AWS Region where the database exists. It is mandatory to do that.
+    + Finally, was able to make an insert.    
